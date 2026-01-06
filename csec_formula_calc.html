@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSEC Mathematics Formula Calculator</title>
+    <style>
+        /* Reset only for calculator container */
+        #mathCalculatorApp * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #mathCalculatorApp {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            background: linear-gradient(135deg, #FF4757 0%, #FF6B7A 100%) !important;
+            min-height: 100vh;
+            padding: 20px;
+            margin: -20px !important;
+            width: calc(100% + 40px) !important;
+        }
+
+        .container {
+            max-width: 800px !important;
+            margin: 40px auto !important;
+            background: white !important;
+            border-radius: 20px !important;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
+            overflow: hidden !important;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF4757 0%, #FF6B7A 100%) !important;
+            color: white !important;
+            padding: 40px !important;
+            text-align: center !important;
+        }
+
+        .header h1 {
+            font-size: 2em !important;
+            margin-bottom: 10px !important;
+            color: white !important;
+            font-weight: bold !important;
+        }
+
+        .header p {
+            opacity: 0.95 !important;
+            font-size: 1.1em !important;
+            color: white !important;
+        }
+
+        .content {
+            padding: 40px !important;
+            background: white !important;
+        }
+
+        .form-group {
+            margin-bottom: 25px !important;
+        }
+
+        .form-group label {
+            display: block !important;
+            margin-bottom: 10px !important;
+            color: #2c3e50 !important;
+            font-weight: 600 !important;
+            font-size: 1.05em !important;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100% !important;
+            padding: 14px !important;
+            border: 2px solid #e1e8ed !important;
+            border-radius: 10px !important;
+            font-size: 1em !important;
+            transition: all 0.3s !important;
+            background: white !important;
+            color: #333 !important;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none !important;
+            border-color: #FF4757 !important;
+            box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1) !important;
+        }
+
+        .formula-display {
+            background: #fff8f8 !important;
+            padding: 25px !important;
+            border-radius: 12px !important;
+            margin: 25px 0 !important;
+            border-left: 4px solid #FF4757 !important;
+        }
+
+        .formula-display h3 {
+            color: #2d3436 !important;
+            margin-bottom: 12px !important;
+            font-size: 1.1em !important;
+            font-weight: 600 !important;
+        }
+
+        .formula-text {
+            font-size: 1.3em !important;
+            color: #2d3436 !important;
+            font-weight: 600 !important;
+            font-family: 'Courier New', monospace !important;
+            background: white !important;
+            padding: 15px !important;
+            border-radius: 8px !important;
+            margin-top: 10px !important;
+        }
+
+        .inputs-section {
+            background: #f8f9fa !important;
+            padding: 25px !important;
+            border-radius: 12px !important;
+            margin: 25px 0 !important;
+        }
+
+        .input-row {
+            display: grid !important;
+            grid-template-columns: 1fr 2fr !important;
+            gap: 15px !important;
+            align-items: center !important;
+            margin-bottom: 15px !important;
+        }
+
+        .input-label {
+            font-weight: 600 !important;
+            color: #2c3e50 !important;
+        }
+
+        .btn {
+            width: 100% !important;
+            padding: 16px !important;
+            background: linear-gradient(135deg, #FF4757 0%, #FF6B7A 100%) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 10px !important;
+            font-size: 1.15em !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.3s !important;
+            margin-top: 20px !important;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4) !important;
+        }
+
+        .btn:active {
+            transform: translateY(0) !important;
+        }
+
+        .result {
+            margin-top: 30px !important;
+            padding: 30px !important;
+            background: linear-gradient(135deg, #FF4757 0%, #FF6B7A 100%) !important;
+            border-radius: 12px !important;
+            text-align: center !important;
+            display: none !important;
+            animation: slideIn 0.4s ease-out !important;
+        }
+
+        .result.show {
+            display: block !important;
+        }
+
+        .result h3 {
+            color: white !important;
+            margin-bottom: 15px !important;
+            font-size: 1.3em !important;
+        }
+
+        .result .answer {
+            font-size: 2.5em !important;
+            color: white !important;
+            font-weight: bold !important;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .note {
+            background: #fff3cd !important;
+            border-left: 4px solid #ffc107 !important;
+            padding: 15px !important;
+            border-radius: 8px !important;
+            margin-top: 20px !important;
+            color: #856404 !important;
+        }
+
+        .counter-section {
+            background: #f8f9fa !important;
+            padding: 25px !important;
+            border-radius: 12px !important;
+            margin-top: 30px !important;
+            text-align: center !important;
+        }
+
+        .counter-section h3 {
+            color: #2d3436 !important;
+            margin-bottom: 15px !important;
+            font-size: 1.2em !important;
+            font-weight: 600 !important;
+        }
+
+        .counter-display {
+            display: flex !important;
+            justify-content: center !important;
+            gap: 20px !important;
+            flex-wrap: wrap !important;
+        }
+
+        .counter-item {
+            background: white !important;
+            padding: 20px 25px !important;
+            border-radius: 10px !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+            min-width: 140px !important;
+        }
+
+        .counter-number {
+            font-size: 2.5em !important;
+            font-weight: bold !important;
+            color: #FF4757 !important;
+            margin-bottom: 5px !important;
+        }
+
+        .counter-label {
+            font-size: 0.85em !important;
+            color: #636e72 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+        }
+
+        .graph-container {
+            background: #f8f9fa !important;
+            padding: 25px !important;
+            border-radius: 12px !important;
+            margin-top: 25px !important;
+            display: none !important;
+        }
+
+        .graph-container.show {
+            display: block !important;
+        }
+
+        .graph-container h3 {
+            color: #2d3436 !important;
+            margin-bottom: 15px !important;
+            text-align: center !important;
+            font-weight: 600 !important;
+        }
+
+        #parabolaCanvas {
+            display: block !important;
+            margin: 0 auto !important;
+            background: white !important;
+            border-radius: 8px !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="mathCalculatorApp">
+    <div class="container">
+        <div class="header">
+            <h1>📐 CSEC Mathematics</h1>
+            <p>Formula Calculator</p>
+        </div>
+
+        <div class="content">
+            <div class="form-group">
+                <label for="category">Select Formula Category:</label>
+                <select id="category" onchange="updateFormulas()">
+                    <option value="">-- Choose a category --</option>
+                    <option value="volume">Volume Formulas</option>
+                    <option value="area">Area Formulas</option>
+                    <option value="circle">Circle Formulas</option>
+                    <option value="finance">Finance Formulas</option>
+                    <option value="triangle">Triangle Formulas</option>
+                    <option value="trigonometry">Trigonometry</option>
+                    <option value="algebra">Relations, Functions and Graphs</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="formulaGroup" style="display:none;">
+                <label for="formula">Select Formula:</label>
+                <select id="formula" onchange="updateVariables()">
+                    <option value="">-- Choose a formula --</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="solveForGroup" style="display:none;">
+                <label for="solveFor">Solve for:</label>
+                <select id="solveFor" onchange="showInputs()">
+                    <option value="">-- Choose variable to calculate --</option>
+                </select>
+            </div>
+
+            <div class="formula-display" id="formulaDisplay" style="display:none;">
+                <h3>Formula:</h3>
+                <div class="formula-text" id="formulaText"></div>
+            </div>
+
+            <div class="inputs-section" id="inputsSection" style="display:none;">
+                <div id="inputsContainer"></div>
+                <button class="btn" onclick="calculate()">Calculate</button>
+            </div>
+
+            <div class="result" id="result">
+                <h3 id="resultLabel">Result:</h3>
+                <div class="answer" id="answer">0</div>
+            </div>
+
+            <div class="graph-container" id="graphContainer">
+                <h3>📈 Parabola Graph</h3>
+                <canvas id="parabolaCanvas" width="600" height="600"></canvas>
+            </div>
+
+            <div class="counter-section" id="counterSection">
+                <h3>📊 Calculation Statistics</h3>
+                <div class="counter-display">
+                    <div class="counter-item">
+                        <div class="counter-number" id="currentFormulaCount">0</div>
+                        <div class="counter-label">This Formula</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-number" id="totalCount">0</div>
+                        <div class="counter-label">Session Total</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-number" id="lifetimeCount">0</div>
+                        <div class="counter-label">Lifetime Total</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        const formulas = {
+            volume: {
+                'Prism': {
+                    formula: 'V = A × h',
+                    variables: {
+                        V: 'Volume',
+                        A: 'Area of cross-section',
+                        h: 'Perpendicular height'
+                    },
+                    calculate: {
+                        V: (vars) => vars.A * vars.h,
+                        A: (vars) => vars.V / vars.h,
+                        h: (vars) => vars.V / vars.A
+                    }
+                },
+                'Cylinder': {
+                    formula: 'V = π × r² × h',
+                    variables: {
+                        V: 'Volume',
+                        r: 'Radius',
+                        h: 'Height'
+                    },
+                    calculate: {
+                        V: (vars) => Math.PI * vars.r * vars.r * vars.h,
+                        r: (vars) => Math.sqrt(vars.V / (Math.PI * vars.h)),
+                        h: (vars) => vars.V / (Math.PI * vars.r * vars.r)
+                    }
+                },
+                'Cone/Pyramid': {
+                    formula: 'V = (1/3) × A × h',
+                    variables: {
+                        V: 'Volume',
+                        A: 'Area of base',
+                        h: 'Perpendicular height'
+                    },
+                    calculate: {
+                        V: (vars) => (1/3) * vars.A * vars.h,
+                        A: (vars) => (3 * vars.V) / vars.h,
+                        h: (vars) => (3 * vars.V) / vars.A
+                    }
+                },
+                'Sphere': {
+                    formula: 'V = (4/3) × π × r³',
+                    variables: {
+                        V: 'Volume',
+                        r: 'Radius'
+                    },
+                    calculate: {
+                        V: (vars) => (4/3) * Math.PI * Math.pow(vars.r, 3),
+                        r: (vars) => Math.pow((3 * vars.V) / (4 * Math.PI), 1/3)
+                    }
+                }
+            },
+            area: {
+                'Triangle': {
+                    formula: 'A = (1/2) × b × h',
+                    variables: {
+                        A: 'Area',
+                        b: 'Base',
+                        h: 'Height'
+                    },
+                    calculate: {
+                        A: (vars) => 0.5 * vars.b * vars.h,
+                        b: (vars) => (2 * vars.A) / vars.h,
+                        h: (vars) => (2 * vars.A) / vars.b
+                    }
+                },
+                'Trapezium': {
+                    formula: 'A = (1/2) × (a + b) × h',
+                    variables: {
+                        A: 'Area',
+                        a: 'Parallel side 1',
+                        b: 'Parallel side 2',
+                        h: 'Height'
+                    },
+                    calculate: {
+                        A: (vars) => 0.5 * (vars.a + vars.b) * vars.h,
+                        a: (vars) => (2 * vars.A / vars.h) - vars.b,
+                        b: (vars) => (2 * vars.A / vars.h) - vars.a,
+                        h: (vars) => (2 * vars.A) / (vars.a + vars.b)
+                    }
+                },
+                'Sphere Surface': {
+                    formula: 'SA = 4 × π × r²',
+                    variables: {
+                        SA: 'Surface Area',
+                        r: 'Radius'
+                    },
+                    calculate: {
+                        SA: (vars) => 4 * Math.PI * vars.r * vars.r,
+                        r: (vars) => Math.sqrt(vars.SA / (4 * Math.PI))
+                    }
+                }
+            },
+            circle: {
+                'Circle Area': {
+                    formula: 'A = π × r²',
+                    variables: {
+                        A: 'Area',
+                        r: 'Radius'
+                    },
+                    calculate: {
+                        A: (vars) => Math.PI * vars.r * vars.r,
+                        r: (vars) => Math.sqrt(vars.A / Math.PI)
+                    }
+                },
+                'Circumference': {
+                    formula: 'C = 2 × π × r',
+                    variables: {
+                        C: 'Circumference',
+                        r: 'Radius'
+                    },
+                    calculate: {
+                        C: (vars) => 2 * Math.PI * vars.r,
+                        r: (vars) => vars.C / (2 * Math.PI)
+                    }
+                },
+                'Arc Length': {
+                    formula: 'S = (θ/360) × 2 × π × r',
+                    variables: {
+                        S: 'Arc length',
+                        θ: 'Angle (degrees)',
+                        r: 'Radius'
+                    },
+                    calculate: {
+                        S: (vars) => (vars.θ / 360) * 2 * Math.PI * vars.r,
+                        θ: (vars) => (vars.S * 360) / (2 * Math.PI * vars.r),
+                        r: (vars) => (vars.S * 360) / (vars.θ * 2 * Math.PI)
+                    }
+                },
+                'Sector Area': {
+                    formula: 'A = (θ/360) × π × r²',
+                    variables: {
+                        A: 'Area',
+                        θ: 'Angle (degrees)',
+                        r: 'Radius'
+                    },
+                    calculate: {
+                        A: (vars) => (vars.θ / 360) * Math.PI * vars.r * vars.r,
+                        θ: (vars) => (vars.A * 360) / (Math.PI * vars.r * vars.r),
+                        r: (vars) => Math.sqrt((vars.A * 360) / (vars.θ * Math.PI))
+                    }
+                }
+            },
+            finance: {
+                'Simple Interest': {
+                    formula: 'SI = (P × R × T) / 100',
+                    variables: {
+                        SI: 'Simple Interest',
+                        P: 'Principal',
+                        R: 'Rate (%)',
+                        T: 'Time (years)'
+                    },
+                    calculate: {
+                        SI: (vars) => (vars.P * vars.R * vars.T) / 100,
+                        P: (vars) => (vars.SI * 100) / (vars.R * vars.T),
+                        R: (vars) => (vars.SI * 100) / (vars.P * vars.T),
+                        T: (vars) => (vars.SI * 100) / (vars.P * vars.R)
+                    }
+                },
+                'Compound Interest': {
+                    formula: 'A = P × (1 + r/100)ⁿ',
+                    variables: {
+                        A: 'Total amount',
+                        P: 'Principal',
+                        r: 'Rate (%)',
+                        n: 'Years'
+                    },
+                    calculate: {
+                        A: (vars) => vars.P * Math.pow(1 + vars.r/100, vars.n),
+                        P: (vars) => vars.A / Math.pow(1 + vars.r/100, vars.n),
+                        r: (vars) => 100 * (Math.pow(vars.A/vars.P, 1/vars.n) - 1),
+                        n: (vars) => Math.log(vars.A/vars.P) / Math.log(1 + vars.r/100)
+                    }
+                },
+                'Depreciation': {
+                    formula: 'A = P × (1 - r/100)ⁿ',
+                    variables: {
+                        A: 'Value after depreciation',
+                        P: 'Initial value',
+                        r: 'Depreciation rate (%)',
+                        n: 'Years'
+                    },
+                    calculate: {
+                        A: (vars) => vars.P * Math.pow(1 - vars.r/100, vars.n),
+                        P: (vars) => vars.A / Math.pow(1 - vars.r/100, vars.n),
+                        r: (vars) => 100 * (1 - Math.pow(vars.A/vars.P, 1/vars.n)),
+                        n: (vars) => Math.log(vars.A/vars.P) / Math.log(1 - vars.r/100)
+                    }
+                }
+            },
+            triangle: {
+                'Triangle with 2 sides & angle': {
+                    formula: 'Area = (1/2) × a × b × sin(C)',
+                    variables: {
+                        Area: 'Area',
+                        a: 'Side a',
+                        b: 'Side b',
+                        C: 'Angle C (degrees)'
+                    },
+                    calculate: {
+                        Area: (vars) => 0.5 * vars.a * vars.b * Math.sin(vars.C * Math.PI / 180)
+                    }
+                },
+                'Pythagoras Theorem': {
+                    formula: 'a² = b² + c²',
+                    variables: {
+                        a: 'Hypotenuse',
+                        b: 'Side b',
+                        c: 'Side c'
+                    },
+                    calculate: {
+                        a: (vars) => Math.sqrt(vars.b * vars.b + vars.c * vars.c),
+                        b: (vars) => Math.sqrt(vars.a * vars.a - vars.c * vars.c),
+                        c: (vars) => Math.sqrt(vars.a * vars.a - vars.b * vars.b)
+                    }
+                }
+            },
+            algebra: {
+                'Quadratic Formula': {
+                    formula: 'x = (-b ± √(b² - 4ac)) / 2a',
+                    variables: {
+                        a: 'Coefficient of x²',
+                        b: 'Coefficient of x',
+                        c: 'Constant term'
+                    },
+                    calculate: {
+                        x: (vars) => {
+                            const discriminant = vars.b * vars.b - 4 * vars.a * vars.c;
+                            if (discriminant < 0) {
+                                return 'No real solutions';
+                            }
+                            const x1 = (-vars.b + Math.sqrt(discriminant)) / (2 * vars.a);
+                            const x2 = (-vars.b - Math.sqrt(discriminant)) / (2 * vars.a);
+                            return discriminant === 0 ? x1 : `x₁ = ${x1.toFixed(3)}, x₂ = ${x2.toFixed(3)}`;
+                        }
+                    }
+                }
+            },
+            trigonometry: {
+                'Sine': {
+                    formula: 'sin(θ) = opposite / hypotenuse',
+                    variables: {
+                        θ: 'Angle (degrees)',
+                        opposite: 'Opposite side',
+                        hypotenuse: 'Hypotenuse'
+                    },
+                    calculate: {
+                        θ: (vars) => Math.asin(vars.opposite / vars.hypotenuse) * 180 / Math.PI,
+                        opposite: (vars) => vars.hypotenuse * Math.sin(vars.θ * Math.PI / 180),
+                        hypotenuse: (vars) => vars.opposite / Math.sin(vars.θ * Math.PI / 180)
+                    }
+                },
+                'Cosine': {
+                    formula: 'cos(θ) = adjacent / hypotenuse',
+                    variables: {
+                        θ: 'Angle (degrees)',
+                        adjacent: 'Adjacent side',
+                        hypotenuse: 'Hypotenuse'
+                    },
+                    calculate: {
+                        θ: (vars) => Math.acos(vars.adjacent / vars.hypotenuse) * 180 / Math.PI,
+                        adjacent: (vars) => vars.hypotenuse * Math.cos(vars.θ * Math.PI / 180),
+                        hypotenuse: (vars) => vars.adjacent / Math.cos(vars.θ * Math.PI / 180)
+                    }
+                },
+                'Tangent': {
+                    formula: 'tan(θ) = opposite / adjacent',
+                    variables: {
+                        θ: 'Angle (degrees)',
+                        opposite: 'Opposite side',
+                        adjacent: 'Adjacent side'
+                    },
+                    calculate: {
+                        θ: (vars) => Math.atan(vars.opposite / vars.adjacent) * 180 / Math.PI,
+                        opposite: (vars) => vars.adjacent * Math.tan(vars.θ * Math.PI / 180),
+                        adjacent: (vars) => vars.opposite / Math.tan(vars.θ * Math.PI / 180)
+                    }
+                }
+            }
+        };
+
+        let currentCategory = '';
+        let currentFormula = '';
+        let currentVariable = '';
+        
+        // Calculation counters
+        let calculationCounts = {};
+        let totalCalculations = 0;
+        let lifetimeCalculations = 0;
+
+        // Load lifetime counter from localStorage
+        function loadLifetimeCount() {
+            const saved = localStorage.getItem('lifetimeCalculations');
+            lifetimeCalculations = saved ? parseInt(saved) : 0;
+        }
+
+        // Save lifetime counter to localStorage
+        function saveLifetimeCount() {
+            localStorage.setItem('lifetimeCalculations', lifetimeCalculations.toString());
+        }
+
+        // Load counters from memory (resets when page closes)
+        function initializeCounters() {
+            Object.keys(formulas).forEach(category => {
+                Object.keys(formulas[category]).forEach(formulaName => {
+                    const key = `${category}-${formulaName}`;
+                    calculationCounts[key] = 0;
+                });
+            });
+            loadLifetimeCount();
+            updateCounterDisplay();
+        }
+
+        function updateCounterDisplay() {
+            const currentKey = `${currentCategory}-${currentFormula}`;
+            document.getElementById('currentFormulaCount').textContent = calculationCounts[currentKey] || 0;
+            document.getElementById('totalCount').textContent = totalCalculations;
+            document.getElementById('lifetimeCount').textContent = lifetimeCalculations;
+        }
+
+        function drawParabola(a, b, c) {
+            const canvas = document.getElementById('parabolaCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Set up coordinate system
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const scale = 50; // pixels per unit
+            
+            // Draw grid
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            
+            // Vertical grid lines
+            for (let x = -5; x <= 5; x++) {
+                ctx.beginPath();
+                ctx.moveTo(centerX + x * scale, 0);
+                ctx.lineTo(centerX + x * scale, height);
+                ctx.stroke();
+            }
+            
+            // Horizontal grid lines
+            for (let y = -5; y <= 5; y++) {
+                ctx.beginPath();
+                ctx.moveTo(0, centerY - y * scale);
+                ctx.lineTo(width, centerY - y * scale);
+                ctx.stroke();
+            }
+            
+            // Draw axes
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            // X-axis
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(width, centerY);
+            ctx.stroke();
+            
+            // Y-axis
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, height);
+            ctx.stroke();
+            
+            // Draw axis labels
+            ctx.fillStyle = '#333';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            
+            // X-axis labels
+            for (let x = -5; x <= 5; x++) {
+                if (x !== 0) {
+                    ctx.fillText(x.toString(), centerX + x * scale, centerY + 20);
+                }
+            }
+            
+            // Y-axis labels
+            ctx.textAlign = 'right';
+            for (let y = -5; y <= 5; y++) {
+                if (y !== 0) {
+                    ctx.fillText(y.toString(), centerX - 10, centerY - y * scale + 5);
+                }
+            }
+            
+            // Draw parabola
+            ctx.strokeStyle = '#FF4757';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            let firstPoint = true;
+            for (let x = -5; x <= 5; x += 0.1) {
+                const y = a * x * x + b * x + c;
+                
+                if (y >= -5 && y <= 5) {
+                    const canvasX = centerX + x * scale;
+                    const canvasY = centerY - y * scale;
+                    
+                    if (firstPoint) {
+                        ctx.moveTo(canvasX, canvasY);
+                        firstPoint = false;
+                    } else {
+                        ctx.lineTo(canvasX, canvasY);
+                    }
+                }
+            }
+            ctx.stroke();
+            
+            // Draw vertex point
+            const vertexX = -b / (2 * a);
+            const vertexY = a * vertexX * vertexX + b * vertexX + c;
+            
+            if (vertexX >= -5 && vertexX <= 5 && vertexY >= -5 && vertexY <= 5) {
+                ctx.fillStyle = '#FF4757';
+                ctx.beginPath();
+                ctx.arc(centerX + vertexX * scale, centerY - vertexY * scale, 5, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                // Label vertex
+                ctx.fillStyle = '#2d3436';
+                ctx.font = 'bold 12px Arial';
+                ctx.textAlign = 'left';
+                ctx.fillText(`Vertex (${vertexX.toFixed(2)}, ${vertexY.toFixed(2)})`, 
+                            centerX + vertexX * scale + 10, 
+                            centerY - vertexY * scale - 10);
+            }
+            
+            // Draw x-intercepts (roots)
+            const discriminant = b * b - 4 * a * c;
+            if (discriminant >= 0) {
+                const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                
+                ctx.fillStyle = '#FFA502';
+                
+                if (x1 >= -5 && x1 <= 5) {
+                    ctx.beginPath();
+                    ctx.arc(centerX + x1 * scale, centerY, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                
+                if (x2 >= -5 && x2 <= 5 && discriminant > 0) {
+                    ctx.beginPath();
+                    ctx.arc(centerX + x2 * scale, centerY, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+            }
+            
+            // Draw equation
+            ctx.fillStyle = '#2d3436';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText(`y = ${a}x² + ${b}x + ${c}`, 20, 30);
+        }
+
+        initializeCounters();
+
+        function updateFormulas() {
+            const category = document.getElementById('category').value;
+            const formulaSelect = document.getElementById('formula');
+            const formulaGroup = document.getElementById('formulaGroup');
+            
+            if (!category) {
+                formulaGroup.style.display = 'none';
+                document.getElementById('solveForGroup').style.display = 'none';
+                document.getElementById('formulaDisplay').style.display = 'none';
+                document.getElementById('inputsSection').style.display = 'none';
+                document.getElementById('result').classList.remove('show');
+                return;
+            }
+
+            currentCategory = category;
+            formulaSelect.innerHTML = '<option value="">-- Choose a formula --</option>';
+            
+            Object.keys(formulas[category]).forEach(formulaName => {
+                const option = document.createElement('option');
+                option.value = formulaName;
+                option.textContent = formulaName;
+                formulaSelect.appendChild(option);
+            });
+
+            formulaGroup.style.display = 'block';
+            document.getElementById('solveForGroup').style.display = 'none';
+            document.getElementById('formulaDisplay').style.display = 'none';
+            document.getElementById('inputsSection').style.display = 'none';
+            document.getElementById('result').classList.remove('show');
+        }
+
+        function updateVariables() {
+            const formulaName = document.getElementById('formula').value;
+            if (!formulaName) {
+                document.getElementById('solveForGroup').style.display = 'none';
+                document.getElementById('formulaDisplay').style.display = 'none';
+                document.getElementById('inputsSection').style.display = 'none';
+                document.getElementById('result').classList.remove('show');
+                return;
+            }
+
+            currentFormula = formulaName;
+            const formula = formulas[currentCategory][formulaName];
+            
+            // Display formula
+            document.getElementById('formulaText').textContent = formula.formula;
+            document.getElementById('formulaDisplay').style.display = 'block';
+
+            // Update solve for dropdown
+            const solveForSelect = document.getElementById('solveFor');
+            solveForSelect.innerHTML = '<option value="">-- Choose variable to calculate --</option>';
+            
+            Object.keys(formula.calculate).forEach(variable => {
+                const option = document.createElement('option');
+                option.value = variable;
+                option.textContent = `${variable} (${formula.variables[variable]})`;
+                solveForSelect.appendChild(option);
+            });
+
+            document.getElementById('solveForGroup').style.display = 'block';
+            document.getElementById('inputsSection').style.display = 'none';
+            document.getElementById('result').classList.remove('show');
+        }
+
+        function showInputs() {
+            const solveFor = document.getElementById('solveFor').value;
+            if (!solveFor) {
+                document.getElementById('inputsSection').style.display = 'none';
+                document.getElementById('result').classList.remove('show');
+                return;
+            }
+
+            currentVariable = solveFor;
+            const formula = formulas[currentCategory][currentFormula];
+            const inputsContainer = document.getElementById('inputsContainer');
+            inputsContainer.innerHTML = '';
+
+            Object.keys(formula.variables).forEach(variable => {
+                if (variable !== solveFor) {
+                    const inputRow = document.createElement('div');
+                    inputRow.className = 'input-row';
+                    inputRow.innerHTML = `
+                        <div class="input-label">${variable} (${formula.variables[variable]}):</div>
+                        <input type="number" id="input_${variable}" step="any" placeholder="Enter ${variable}">
+                    `;
+                    inputsContainer.appendChild(inputRow);
+                }
+            });
+
+            document.getElementById('inputsSection').style.display = 'block';
+            document.getElementById('result').classList.remove('show');
+        }
+
+        function calculate() {
+            const formula = formulas[currentCategory][currentFormula];
+            const vars = {};
+            let allInputsValid = true;
+
+            Object.keys(formula.variables).forEach(variable => {
+                if (variable !== currentVariable) {
+                    const input = document.getElementById(`input_${variable}`);
+                    const value = parseFloat(input.value);
+                    if (isNaN(value)) {
+                        allInputsValid = false;
+                        input.style.borderColor = '#e74c3c';
+                    } else {
+                        vars[variable] = value;
+                        input.style.borderColor = '#e1e8ed';
+                    }
+                }
+            });
+
+            if (!allInputsValid) {
+                alert('Please fill in all fields with valid numbers');
+                return;
+            }
+
+            const result = formula.calculate[currentVariable](vars);
+            document.getElementById('resultLabel').textContent = `${currentVariable} (${formula.variables[currentVariable]}):`;
+            
+            // Handle special case for quadratic formula
+            if (typeof result === 'string') {
+                document.getElementById('answer').textContent = result;
+            } else {
+                document.getElementById('answer').textContent = result.toFixed(3);
+            }
+            
+            document.getElementById('result').classList.add('show');
+
+            // Show graph for quadratic formula
+            if (currentCategory === 'algebra' && currentFormula === 'Quadratic Formula') {
+                drawParabola(vars.a, vars.b, vars.c);
+                document.getElementById('graphContainer').classList.add('show');
+            } else {
+                document.getElementById('graphContainer').classList.remove('show');
+            }
+
+            // Update counters
+            const currentKey = `${currentCategory}-${currentFormula}`;
+            calculationCounts[currentKey]++;
+            totalCalculations++;
+            lifetimeCalculations++;
+            saveLifetimeCount();
+            updateCounterDisplay();
+        }
+    </script>
+</body>
+</html>
