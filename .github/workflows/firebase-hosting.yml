@@ -21,7 +21,7 @@
                 run: npm install -g firebase-tools
 
               - name: Deploy to Firebase Hosting
-                run: firebase deploy --only hosting --csec-maths-calculator # Use your Project ID
+                run: firebase deploy --only hosting --project csec-maths-calculator # Use your Project ID
                 env:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
                   
