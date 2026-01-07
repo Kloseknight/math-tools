@@ -1,0 +1,29 @@
+        name: Deploy to Firebase Hosting
+
+        on:
+          push:
+            branches:
+              - main # Replace with the name of your primary branch (e.g., 'main' or 'master')
+
+        jobs:
+          build_and_deploy:
+            runs-on: ubuntu-latest
+            steps:
+              - name: Checkout code
+                uses: actions/checkout@v4
+
+              - name: Setup Node.js
+                uses: actions/setup-node@v4
+                with:
+                  node-version: '20' # Use a recent, stable Node.js version
+
+              - name: Install Firebase CLI
+                run: npm install -g firebase-tools
+
+              - name: Deploy to Firebase Hosting
+                run: firebase deploy --only hosting --project digital-products-d95b4 # Use your Project ID
+                env:
+                  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+                  
+
+
