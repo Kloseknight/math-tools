@@ -45,7 +45,6 @@ export default function FormulaCalculator({ formula, onCalculate }: FormulaCalcu
       numericValues[variable.symbol] = numValue;
     }
 
-    // Check token availability before calculation
     if (onCalculate) {
       const canCalculate = await onCalculate();
       if (!canCalculate) {
@@ -70,6 +69,18 @@ export default function FormulaCalculator({ formula, onCalculate }: FormulaCalcu
 
   const isQuadratic = formula.id === 'quadratic_roots';
   const hasRoots = result && typeof result === 'object' && 'root1' in result;
+  
+  const renderResult = (res: any) => {
+    if (typeof res === 'number') {
+      return res.toFixed(4);
+    }
+    if (typeof res === 'object' && res !== null) {
+      return Object.entries(res)
+        .map(([key, value]) => `${key}: ${Number(value).toFixed(4)}`)
+        .join(', ');
+    }
+    return res;
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -110,7 +121,6 @@ export default function FormulaCalculator({ formula, onCalculate }: FormulaCalcu
       )}
 
       <div className="space-y-4">
-        <p className="text-sm font-semibold text-gray-700">Enter known values</p>
         {inputVariables.map(variable => (
           <div key={variable.symbol}>
             <label className="block text-sm font-medium text-gray-600 mb-1">
@@ -155,7 +165,7 @@ export default function FormulaCalculator({ formula, onCalculate }: FormulaCalcu
           <div className="flex items-baseline gap-3">
             <span className="text-2xl font-bold text-gray-900">{solveFor} =</span>
             <span className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-              {typeof result === 'number' ? result.toFixed(4) : result}
+              {renderResult(result)}
             </span>
           </div>
         </div>
