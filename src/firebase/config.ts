@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAh4YZF7VjhMRjW3OgutwZjQnz1dp7CbIM",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "csec-maths-calculator.firebaseapp.com",
   projectId: "csec-maths-calculator",
   storageBucket: "csec-maths-calculator.firebasestorage.app",

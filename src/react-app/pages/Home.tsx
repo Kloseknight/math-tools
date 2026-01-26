@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { formulaCategories } from '@/react-app/data/formulas';
 import FormulaSelector from '@/react-app/components/FormulaSelector';
 import FormulaCalculator from '@/react-app/components/FormulaCalculator';
-import AdSense from '@/react-app/components/AdSense';
+// import AdSense from '@/react-app/components/AdSense';
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -18,12 +18,12 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-pink-50">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <AdSense adClient="ca-pub-8582608207724522" adSlot="7154657519" />
+        {/* <AdSense adClient="ca-pub-8582608207724522" adSlot="7154657519" /> */}
         <header className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex-1">
               <h1 className="text-5xl font-bold bg-gradient-to-r from-[#FF4757] to-[#ff6b7a] bg-clip-text text-transparent mb-3">
-                CSEC Mathematics Formula Calculator
+                CSEC Mathematics Calculator
               </h1>
               <p className="text-gray-600 text-lg">
                 Select a category and formula to solve mathematical equations
@@ -65,7 +65,6 @@ export default function HomePage() {
         </div>
 
         <footer className="text-center mt-8 text-gray-500 text-sm">
-          <p>Enter known values and select which variable to solve for</p>
         </footer>
       </div>
     </div>
