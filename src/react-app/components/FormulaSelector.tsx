@@ -23,15 +23,15 @@ export default function FormulaSelector({
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-4">
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-l font-semibold text-gray-800 mb-2">
           Category
         </label>
         <select
           value={selectedCategory}
           onChange={(e) => handleCategoryChange(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#FF4757] focus:ring-4 focus:ring-red-100 transition-all outline-none text-gray-900 bg-white"
+          className="w-full px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-[#FF4757] focus:ring-2 focus:ring-red-100 transition-all outline-none text-gray-900 bg-white"
         >
           <option value="">Select a category...</option>
           {categories.map(category => (
@@ -50,7 +50,7 @@ export default function FormulaSelector({
           <select
             value={selectedFormula}
             onChange={(e) => onFormulaChange(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#FF4757] focus:ring-4 focus:ring-red-100 transition-all outline-none text-gray-900 bg-white"
+            className="w-full px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-[#FF4757] focus:ring-2 focus:ring-red-100 transition-all outline-none text-gray-900 bg-white"
           >
             <option value="">Select a formula...</option>
             {currentCategory.formulas.map(formula => (

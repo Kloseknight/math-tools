@@ -2,6 +2,7 @@ export interface Variable {
   symbol: string;
   name: string;
   unit?: string;
+  unitType?: 'length' | 'area' | 'volume';
 }
 
 export interface Formula {
@@ -20,15 +21,32 @@ export interface FormulaCategory {
   formulas: Formula[];
 }
 
-// Area Formulas
-const areaFormulas: Formula[] = [
+// Measurement Formulas (Length, Area, Volume)
+const measurementFormulas: Formula[] = [
+  // Area
+  {
+    id: 'rectangle_area',
+    name: 'Area of a rectangle/square',
+    equation: 'A = l × w',
+    variables: [
+      { symbol: 'A', name: 'Area', unitType: 'area' },
+      { symbol: 'l', name: 'Length', unitType: 'length' },
+      { symbol: 'w', name: 'Width', unitType: 'length' }
+    ],
+    solve: (solveFor, values) => {
+      if (solveFor === 'A') return values.l * values.w;
+      if (solveFor === 'l') return values.A / values.w;
+      if (solveFor === 'w') return values.A / values.l;
+      return null;
+    }
+  },
   {
     id: 'circle_area',
     name: 'Area of a circle',
     equation: 'A = πr²',
     variables: [
-      { symbol: 'A', name: 'Area' },
-      { symbol: 'r', name: 'Radius' }
+      { symbol: 'A', name: 'Area', unitType: 'area' },
+      { symbol: 'r', name: 'Radius', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'A') return Math.PI * values.r * values.r;
@@ -41,9 +59,9 @@ const areaFormulas: Formula[] = [
     name: 'Area of a sector',
     equation: 'A = (θ/360) × πr²',
     variables: [
-      { symbol: 'A', name: 'Area' },
+      { symbol: 'A', name: 'Area', unitType: 'area' },
       { symbol: 'θ', name: 'Angle (degrees)' },
-      { symbol: 'r', name: 'Radius' }
+      { symbol: 'r', name: 'Radius', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'A') return (values.θ / 360) * Math.PI * values.r * values.r;
@@ -57,10 +75,10 @@ const areaFormulas: Formula[] = [
     name: 'Area of a trapezium',
     equation: 'A = (1/2)(a + b)h',
     variables: [
-      { symbol: 'A', name: 'Area' },
-      { symbol: 'a', name: 'Length of first parallel side' },
-      { symbol: 'b', name: 'Length of second parallel side' },
-      { symbol: 'h', name: 'Perpendicular distance' }
+      { symbol: 'A', name: 'Area', unitType: 'area' },
+      { symbol: 'a', name: 'Length of first parallel side', unitType: 'length' },
+      { symbol: 'b', name: 'Length of second parallel side', unitType: 'length' },
+      { symbol: 'h', name: 'Perpendicular distance', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'A') return 0.5 * (values.a + values.b) * values.h;
@@ -75,9 +93,9 @@ const areaFormulas: Formula[] = [
     name: 'Curved surface area of a cone',
     equation: 'CSA = πrl',
     variables: [
-      { symbol: 'CSA', name: 'Curved surface area' },
-      { symbol: 'r', name: 'Radius of the base' },
-      { symbol: 'l', name: 'Slant height' }
+      { symbol: 'CSA', name: 'Curved surface area', unitType: 'area' },
+      { symbol: 'r', name: 'Radius of the base', unitType: 'length' },
+      { symbol: 'l', name: 'Slant height', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'CSA') return Math.PI * values.r * values.l;
@@ -91,27 +109,42 @@ const areaFormulas: Formula[] = [
     name: 'Surface area of a sphere',
     equation: 'SA = 4πr²',
     variables: [
-      { symbol: 'SA', name: 'Surface area' },
-      { symbol: 'r', name: 'Radius' }
+      { symbol: 'SA', name: 'Surface area', unitType: 'area' },
+      { symbol: 'r', name: 'Radius', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'SA') return 4 * Math.PI * values.r * values.r;
       if (solveFor === 'r') return Math.sqrt(values.SA / (4 * Math.PI));
       return null;
     }
-  }
-];
-
-// Volume Formulas
-const volumeFormulas: Formula[] = [
+  },
+  // Volume
+  {
+    id: 'cuboid_volume',
+    name: 'Volume of a cuboid/cube',
+    equation: 'V = l × w × h',
+    variables: [
+      { symbol: 'V', name: 'Volume', unitType: 'volume' },
+      { symbol: 'l', name: 'Length', unitType: 'length' },
+      { symbol: 'w', name: 'Width', unitType: 'length' },
+      { symbol: 'h', name: 'Height', unitType: 'length' }
+    ],
+    solve: (solveFor, values) => {
+      if (solveFor === 'V') return values.l * values.w * values.h;
+      if (solveFor === 'l') return values.V / (values.w * values.h);
+      if (solveFor === 'w') return values.V / (values.l * values.h);
+      if (solveFor === 'h') return values.V / (values.l * values.w);
+      return null;
+    }
+  },
   {
     id: 'prism_volume',
     name: 'Volume of a prism',
     equation: 'V = Ah',
     variables: [
-      { symbol: 'V', name: 'Volume' },
-      { symbol: 'A', name: 'Area of cross-section' },
-      { symbol: 'h', name: 'Perpendicular height' }
+      { symbol: 'V', name: 'Volume', unitType: 'volume' },
+      { symbol: 'A', name: 'Area of cross-section', unitType: 'area' },
+      { symbol: 'h', name: 'Perpendicular height', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'V') return values.A * values.h;
@@ -125,9 +158,9 @@ const volumeFormulas: Formula[] = [
     name: 'Volume of a cylinder',
     equation: 'V = πr²h',
     variables: [
-      { symbol: 'V', name: 'Volume' },
-      { symbol: 'r', name: 'Radius of the base' },
-      { symbol: 'h', name: 'Perpendicular height' }
+      { symbol: 'V', name: 'Volume', unitType: 'volume' },
+      { symbol: 'r', name: 'Radius of the base', unitType: 'length' },
+      { symbol: 'h', name: 'Perpendicular height', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'V') return Math.PI * values.r * values.r * values.h;
@@ -141,9 +174,9 @@ const volumeFormulas: Formula[] = [
     name: 'Volume of a cone/pyramid',
     equation: 'V = (1/3)Ah',
     variables: [
-      { symbol: 'V', name: 'Volume' },
-      { symbol: 'A', name: 'Area of the base' },
-      { symbol: 'h', name: 'Perpendicular height' }
+      { symbol: 'V', name: 'Volume', unitType: 'volume' },
+      { symbol: 'A', name: 'Area of the base', unitType: 'area' },
+      { symbol: 'h', name: 'Perpendicular height', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'V') return (1/3) * values.A * values.h;
@@ -157,26 +190,23 @@ const volumeFormulas: Formula[] = [
     name: 'Volume of a sphere',
     equation: 'V = (4/3)πr³',
     variables: [
-      { symbol: 'V', name: 'Volume' },
-      { symbol: 'r', name: 'Radius' }
+      { symbol: 'V', name: 'Volume', unitType: 'volume' },
+      { symbol: 'r', name: 'Radius', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'V') return (4/3) * Math.PI * Math.pow(values.r, 3);
       if (solveFor === 'r') return Math.cbrt((3 * values.V) / (4 * Math.PI));
       return null;
     }
-  }
-];
-
-// Circle Formulas
-const circleFormulas: Formula[] = [
+  },
+  // Length (Circle)
   {
     id: 'circle_circumference',
     name: 'Circumference of a circle',
     equation: 'C = 2πr',
     variables: [
-      { symbol: 'C', name: 'Circumference' },
-      { symbol: 'r', name: 'Radius' }
+      { symbol: 'C', name: 'Circumference', unitType: 'length' },
+      { symbol: 'r', name: 'Radius', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'C') return 2 * Math.PI * values.r;
@@ -185,27 +215,13 @@ const circleFormulas: Formula[] = [
     }
   },
   {
-    id: 'circle_area',
-    name: 'Area of a circle',
-    equation: 'A = πr²',
-    variables: [
-      { symbol: 'A', name: 'Area' },
-      { symbol: 'r', name: 'Radius' }
-    ],
-    solve: (solveFor, values) => {
-      if (solveFor === 'A') return Math.PI * values.r * values.r;
-      if (solveFor === 'r') return Math.sqrt(values.A / Math.PI);
-      return null;
-    }
-  },
-  {
     id: 'arc_length',
     name: 'Arc length',
     equation: 'S = (θ/360) × 2πr',
     variables: [
-      { symbol: 'S', name: 'Arc length' },
+      { symbol: 'S', name: 'Arc length', unitType: 'length' },
       { symbol: 'θ', name: 'Angle subtended by the arc (degrees)' },
-      { symbol: 'r', name: 'Radius' }
+      { symbol: 'r', name: 'Radius', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'S') return (values.θ / 360) * 2 * Math.PI * values.r;
@@ -214,34 +230,15 @@ const circleFormulas: Formula[] = [
       return null;
     }
   },
-  {
-    id: 'sector_area',
-    name: 'Area of a sector',
-    equation: 'A = (θ/360) × πr²',
-    variables: [
-      { symbol: 'A', name: 'Area' },
-      { symbol: 'θ', name: 'Angle (degrees)' },
-      { symbol: 'r', name: 'Radius' }
-    ],
-    solve: (solveFor, values) => {
-      if (solveFor === 'A') return (values.θ / 360) * Math.PI * values.r * values.r;
-      if (solveFor === 'θ') return (360 * values.A) / (Math.PI * values.r * values.r);
-      if (solveFor === 'r') return Math.sqrt((360 * values.A) / (values.θ * Math.PI));
-      return null;
-    }
-  }
-];
-
-// Triangle Formulas
-const triangleFormulas: Formula[] = [
+  // Triangle Area
   {
     id: 'triangle_area_base',
     name: 'Area of a triangle (base × height)',
     equation: 'A = (1/2)bh',
     variables: [
-      { symbol: 'A', name: 'Area' },
-      { symbol: 'b', name: 'Base length' },
-      { symbol: 'h', name: 'Perpendicular height' }
+      { symbol: 'A', name: 'Area', unitType: 'area' },
+      { symbol: 'b', name: 'Base length', unitType: 'length' },
+      { symbol: 'h', name: 'Perpendicular height', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'A') return 0.5 * values.b * values.h;
@@ -255,9 +252,9 @@ const triangleFormulas: Formula[] = [
     name: 'Area of a triangle (two sides and included angle)',
     equation: 'A = (1/2)ab sin C',
     variables: [
-      { symbol: 'A', name: 'Area' },
-      { symbol: 'a', name: 'Length of first adjacent side' },
-      { symbol: 'b', name: 'Length of second adjacent side' },
+      { symbol: 'A', name: 'Area', unitType: 'area' },
+      { symbol: 'a', name: 'Length of first adjacent side', unitType: 'length' },
+      { symbol: 'b', name: 'Length of second adjacent side', unitType: 'length' },
       { symbol: 'C', name: 'Included angle (degrees)' }
     ],
     solve: (solveFor, values) => {
@@ -273,10 +270,10 @@ const triangleFormulas: Formula[] = [
     name: "Area of a triangle (Heron's formula)",
     equation: 'A = √[s(s-a)(s-b)(s-c)] where s = (a+b+c)/2',
     variables: [
-      { symbol: 'A', name: 'Area' },
-      { symbol: 'a', name: 'Length of first side' },
-      { symbol: 'b', name: 'Length of second side' },
-      { symbol: 'c', name: 'Length of third side' }
+      { symbol: 'A', name: 'Area', unitType: 'area' },
+      { symbol: 'a', name: 'Length of first side', unitType: 'length' },
+      { symbol: 'b', name: 'Length of second side', unitType: 'length' },
+      { symbol: 'c', name: 'Length of third side', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'A') {
@@ -288,7 +285,7 @@ const triangleFormulas: Formula[] = [
   }
 ];
 
-// Finance Formulas
+// Consumer Arithmetic Formulas
 const financeFormulas: Formula[] = [
   {
     id: 'simple_interest',
@@ -346,7 +343,7 @@ const financeFormulas: Formula[] = [
   }
 ];
 
-// Algebra Formulas
+// Relations, Functions and Graphs Formulas
 const algebraFormulas: Formula[] = [
   {
     id: 'quadratic_roots',
@@ -371,16 +368,16 @@ const algebraFormulas: Formula[] = [
   }
 ];
 
-// Trigonometry Formulas
+// Geometry and Trigonometry Formulas
 const trigonometryFormulas: Formula[] = [
   {
     id: 'pythagoras',
     name: 'Pythagorean theorem',
     equation: 'a² = b² + c²',
     variables: [
-      { symbol: 'a', name: 'Length of hypotenuse' },
-      { symbol: 'b', name: 'Length of opposite side' },
-      { symbol: 'c', name: 'Length of adjacent side' }
+      { symbol: 'a', name: 'Length of hypotenuse', unitType: 'length' },
+      { symbol: 'b', name: 'Length of opposite side', unitType: 'length' },
+      { symbol: 'c', name: 'Length of adjacent side', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'a') return Math.sqrt(values.b * values.b + values.c * values.c);
@@ -395,8 +392,8 @@ const trigonometryFormulas: Formula[] = [
     equation: 'sin θ = opposite / hypotenuse',
     variables: [
       { symbol: 'θ', name: 'Angle (degrees)' },
-      { symbol: 'opposite', name: 'Opposite side' },
-      { symbol: 'hypotenuse', name: 'Hypotenuse' }
+      { symbol: 'opposite', name: 'Opposite side', unitType: 'length' },
+      { symbol: 'hypotenuse', name: 'Hypotenuse', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'θ') return (Math.asin(values.opposite / values.hypotenuse) * 180) / Math.PI;
@@ -411,8 +408,8 @@ const trigonometryFormulas: Formula[] = [
     equation: 'cos θ = adjacent / hypotenuse',
     variables: [
       { symbol: 'θ', name: 'Angle (degrees)' },
-      { symbol: 'adjacent', name: 'Adjacent side' },
-      { symbol: 'hypotenuse', name: 'Hypotenuse' }
+      { symbol: 'adjacent', name: 'Adjacent side', unitType: 'length' },
+      { symbol: 'hypotenuse', name: 'Hypotenuse', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'θ') return (Math.acos(values.adjacent / values.hypotenuse) * 180) / Math.PI;
@@ -427,8 +424,8 @@ const trigonometryFormulas: Formula[] = [
     equation: 'tan θ = opposite / adjacent',
     variables: [
       { symbol: 'θ', name: 'Angle (degrees)' },
-      { symbol: 'opposite', name: 'Opposite side' },
-      { symbol: 'adjacent', name: 'Adjacent side' }
+      { symbol: 'opposite', name: 'Opposite side', unitType: 'length' },
+      { symbol: 'adjacent', name: 'Adjacent side', unitType: 'length' }
     ],
     solve: (solveFor, values) => {
       if (solveFor === 'θ') return (Math.atan(values.opposite / values.adjacent) * 180) / Math.PI;
@@ -442,9 +439,9 @@ const trigonometryFormulas: Formula[] = [
     name: 'Sine rule',
     equation: 'a/sin A = b/sin B = c/sin C',
     variables: [
-      { symbol: 'a', name: 'Side a' },
+      { symbol: 'a', name: 'Side a', unitType: 'length' },
       { symbol: 'A', name: 'Angle A (degrees) opposite side a' },
-      { symbol: 'b', name: 'Side b' },
+      { symbol: 'b', name: 'Side b', unitType: 'length' },
       { symbol: 'B', name: 'Angle B (degrees) opposite side b' }
     ],
     solve: (solveFor, values) => {
@@ -460,9 +457,9 @@ const trigonometryFormulas: Formula[] = [
     name: 'Cosine rule',
     equation: 'a² = b² + c² - 2bc cos A',
     variables: [
-      { symbol: 'a', name: 'Side a' },
-      { symbol: 'b', name: 'Side b' },
-      { symbol: 'c', name: 'Side c' },
+      { symbol: 'a', name: 'Side a', unitType: 'length' },
+      { symbol: 'b', name: 'Side b', unitType: 'length' },
+      { symbol: 'c', name: 'Side c', unitType: 'length' },
       { symbol: 'A', name: 'Angle A (degrees) opposite side a' }
     ],
     solve: (solveFor, values) => {
@@ -484,38 +481,23 @@ const trigonometryFormulas: Formula[] = [
 
 export const formulaCategories: FormulaCategory[] = [
   {
-    id: 'area',
-    name: 'Area Formulas',
-    formulas: areaFormulas
-  },
-  {
-    id: 'volume',
-    name: 'Volume Formulas',
-    formulas: volumeFormulas
-  },
-  {
-    id: 'circle',
-    name: 'Circle Formulas',
-    formulas: circleFormulas
-  },
-  {
-    id: 'triangle',
-    name: 'Triangle Formulas',
-    formulas: triangleFormulas
+    id: 'measurement',
+    name: 'Measurement',
+    formulas: measurementFormulas
   },
   {
     id: 'finance',
-    name: 'Finance Formulas',
+    name: 'Consumer Arithmetic',
     formulas: financeFormulas
   },
   {
     id: 'trigonometry',
-    name: 'Trigonometry',
+    name: 'Geometry and Trigonometry',
     formulas: trigonometryFormulas
   },
   {
     id: 'algebra',
-    name: 'Algebra',
+    name: 'Relations, Functions and Graphs',
     formulas: algebraFormulas
   }
 ];

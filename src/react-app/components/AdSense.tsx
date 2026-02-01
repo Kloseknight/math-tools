@@ -1,3 +1,4 @@
+/*
 import { useEffect } from 'react';
 
 interface AdSenseProps {
@@ -39,3 +40,4 @@ const AdSense = ({ adClient, adSlot }: AdSenseProps) => {
 };
 
 export default AdSense;
+*/

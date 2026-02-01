@@ -1,14 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from '@/react-app/hooks/useAuth';
 import HomePage from '@/react-app/pages/Home';
+import DictionaryPage from '@/react-app/pages/Dictionary';
+import Guides from '@/react-app/pages/Guides';
+import About from '@/react-app/pages/About';
+import PrivacyPolicy from '@/react-app/pages/PrivacyPolicy';
+import Videos from '@/react-app/pages/Videos';
+import Layout from '@/react-app/components/layout/Layout';
 
 export default function App() {
   return (
     <AuthProvider>
       <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/dictionary" element={<DictionaryPage />} />
+            <Route path="/guides" element={<Guides />} />
+            <Route path="/videos/:categoryId" element={<Videos />} />
+            <Route path="/videos" element={<Navigate to="/videos/number-theory-and-computation" replace />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          </Routes>
+        </Layout>
       </Router>
     </AuthProvider>
   );
