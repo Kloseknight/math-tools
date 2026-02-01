@@ -1,4 +1,4 @@
-import { VideoCategory, VideoSubTopic } from './types';
+import { VideoCategory } from './types';
 
 export const videoCategories: VideoCategory[] = [
   {

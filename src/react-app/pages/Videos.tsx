@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { videos } from '@/react-app/data/videos';
 import { videoCategories } from '@/react-app/data/videoCategories';
+import { Video } from '@/react-app/data/types';
 
 const Videos: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -14,13 +15,13 @@ const Videos: React.FC = () => {
   const categoryVideos = videos.filter(video => video.category === categoryInfo.name);
 
   // Group videos by subtopics
-  const groupedVideos: { [key: string]: typeof videos } = {};
-  const ungroupedVideos: typeof videos = [];
+  const groupedVideos: { [key: string]: Video[] } = {};
+  const ungroupedVideos: Video[] = [];
 
   categoryVideos.forEach(video => {
     let matched = false;
     for (const subTopic of categoryInfo.subTopics) {
-      if (subTopic.keywords.some(keyword => video.title.toLowerCase().includes(keyword.toLowerCase()))) {
+      if (subTopic.keywords.some((keyword: string) => video.title.toLowerCase().includes(keyword.toLowerCase()))) {
         if (!groupedVideos[subTopic.name]) groupedVideos[subTopic.name] = [];
         groupedVideos[subTopic.name].push(video);
         matched = true;

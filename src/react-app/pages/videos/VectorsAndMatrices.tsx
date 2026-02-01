@@ -1,8 +1,9 @@
 import React from 'react';
-import { videos, Video } from '../../data/videos';
+import { videos } from '../../data/videos';
+import { Video } from '../../data/types';
 
 const VectorsAndMatrices: React.FC = () => {
-  const vectorsAndMatricesVideos = videos.filter(video => video.category === 'Vectors and Matrices');
+  const vectorsAndMatricesVideos: Video[] = videos.filter(video => video.category === 'Vectors and Matrices');
 
   return (
     <div className="p-4">

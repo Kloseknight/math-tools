@@ -1,11 +1,12 @@
 import React from 'react';
-import { videos, Video } from '../../data/videos';
+import { videos } from '../../data/videos';
+import { Video } from '../../data/types';
 
 const Measurements: React.FC = () => {
-  const measurementsVideos = videos.filter(video => video.category === 'Measurements');
+  const measurementsVideos: Video[] = videos.filter(video => video.category === 'Measurements');
 
-  const subCategories = {
-    'Area and Perimeter': measurementsVideos.filter(video => video.title.toLowerCase().includes('area and perimeter')),
+  const subCategories: { [key: string]: Video[] } = {
+    'Unit Conversion': measurementsVideos.filter(video => video.title.toLowerCase().includes('unit conversion')),
   };
 
   return (
@@ -13,7 +14,7 @@ const Measurements: React.FC = () => {
       <h1 className="text-2xl font-bold mb-4">Worked Examples</h1>
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold border-b-2 border-gray-300 mb-4">Measurement</h2>
+        <h2 className="text-xl font-semibold border-b-2 border-gray-300 mb-4">Measurements</h2>
 
         {Object.entries(subCategories).map(([subCategory, subCategoryVideos]) => (
           subCategoryVideos.length > 0 && (

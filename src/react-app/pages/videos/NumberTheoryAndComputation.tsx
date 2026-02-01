@@ -1,14 +1,15 @@
 import React from 'react';
-import { videos, Video } from '../../data/videos';
+import { videos } from '../../data/videos';
+import { Video } from '../../data/types';
 
 const NumberTheoryAndComputation: React.FC = () => {
-  const numberTheoryVideos = videos.filter(video => video.category === 'Number Theory and Computation');
+  const numberTheoryAndComputationVideos: Video[] = videos.filter(video => video.category === 'Number Theory and Computation');
 
-  const subCategories = {
-    'Significant Figures': numberTheoryVideos.filter(video => video.title.toLowerCase().includes('significant figures')),
-    'Scientific Notation': numberTheoryVideos.filter(video => video.title.toLowerCase().includes('scientific notation')),
-    'Fractions': numberTheoryVideos.filter(video => video.title.toLowerCase().includes('fraction')),
-    'Ratio and Proportion': numberTheoryVideos.filter(video => video.title.toLowerCase().includes('ratio and proportion')),
+  const subCategories: { [key: string]: Video[] } = {
+    'Significant Figures': numberTheoryAndComputationVideos.filter(video => video.title.toLowerCase().includes('significant figures')),
+    'Scientific Notation': numberTheoryAndComputationVideos.filter(video => video.title.toLowerCase().includes('scientific notation')),
+    'Fractions': numberTheoryAndComputationVideos.filter(video => video.title.toLowerCase().includes('fraction')),
+    'Ratio and Proportion': numberTheoryAndComputationVideos.filter(video => video.title.toLowerCase().includes('ratio and proportion')),
   };
 
   return (
@@ -17,7 +18,7 @@ const NumberTheoryAndComputation: React.FC = () => {
 
       <div className="mb-8">
         <h2 className="text-xl font-semibold border-b-2 border-gray-300 mb-4">Number Theory and Computation</h2>
-        
+
         {Object.entries(subCategories).map(([subCategory, subCategoryVideos]) => (
           subCategoryVideos.length > 0 && (
             <div key={subCategory} className="mb-8">

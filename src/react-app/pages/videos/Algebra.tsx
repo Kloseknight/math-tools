@@ -1,10 +1,11 @@
 import React from 'react';
-import { videos, Video } from '../../data/videos';
+import { videos } from '../../data/videos';
+import { Video } from '../../data/types';
 
 const Algebra: React.FC = () => {
-  const algebraVideos = videos.filter(video => video.category === 'Algebra');
+  const algebraVideos: Video[] = videos.filter(video => video.category === 'Algebra');
 
-  const subCategories = {
+  const subCategories: { [key: string]: Video[] } = {
     'Binary Operations': algebraVideos.filter(video => video.title.toLowerCase().includes('binary operations')),
   };
 

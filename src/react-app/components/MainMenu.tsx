@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { videoCategories } from '@/react-app/data/videoCategories';
 
 const MainMenu: React.FC = () => {

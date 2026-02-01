@@ -1,8 +1,9 @@
 import React from 'react';
-import { videos, Video } from '../../data/videos';
+import { videos } from '../../data/videos';
+import { Video } from '../../data/types';
 
 const RelationsFunctionsAndGraphs: React.FC = () => {
-  const relationsFunctionsAndGraphsVideos = videos.filter(video => video.category === 'Relations, Functions and Graphs');
+  const relationsFunctionsAndGraphsVideos: Video[] = videos.filter(video => video.category === 'Relations, Functions and Graphs');
 
   return (
     <div className="p-4">
