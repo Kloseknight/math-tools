@@ -1,12 +1,27 @@
-import React from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { useParams, Navigate, useLocation } from 'react-router-dom';
 import { videos } from '@/react-app/data/videos';
 import { videoCategories } from '@/react-app/data/videoCategories';
 import { Video } from '@/react-app/data/types';
 
 const Videos: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
+  const location = useLocation();
+  const highlightedRef = useRef<HTMLDivElement>(null);
   const categoryInfo = videoCategories.find(cat => cat.id === categoryId);
+
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash && highlightedRef.current) {
+      setTimeout(() => {
+        highlightedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        highlightedRef.current?.classList.add('ring-2', 'ring-offset-2', 'ring-red-500');
+        setTimeout(() => {
+            highlightedRef.current?.classList.remove('ring-2', 'ring-offset-2', 'ring-red-500');
+        }, 3000);
+      }, 100);
+    }
+  }, [location]);
 
   if (!categoryInfo) {
     return <Navigate to="/" replace />;
@@ -14,7 +29,6 @@ const Videos: React.FC = () => {
 
   const categoryVideos = videos.filter(video => video.category === categoryInfo.name);
 
-  // Group videos by subtopics
   const groupedVideos: { [key: string]: Video[] } = {};
   const ungroupedVideos: Video[] = [];
 
@@ -31,6 +45,33 @@ const Videos: React.FC = () => {
     if (!matched) ungroupedVideos.push(video);
   });
 
+  const renderVideo = (video: Video) => {
+    const videoId = video.id.toString();
+    const isHighlighted = `#video-${videoId}` === location.hash;
+    return (
+      <div 
+        key={video.id} 
+        id={`video-${video.id}`}
+        ref={isHighlighted ? highlightedRef : null}
+        className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300"
+      >
+        <div className="aspect-video">
+          <iframe 
+            src={`https://www.youtube.com/embed/${video.youtubeId}`}
+            title={video.title}
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+            className="w-full h-full"
+          ></iframe>
+        </div>
+        <div className="p-4">
+          <h4 className="font-semibold text-gray-800">{video.title}</h4>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-2">Worked Examples</h1>
@@ -43,23 +84,7 @@ const Videos: React.FC = () => {
             {subTopic}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {subVideos.map(video => (
-              <div key={video.id} className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-video">
-                  <iframe 
-                    src={`https://www.youtube.com/embed/${video.youtubeId}`}
-                    title={video.title}
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <div className="p-4">
-                  <h4 className="font-semibold text-gray-800">{video.title}</h4>
-                </div>
-              </div>
-            ))}
+            {subVideos.map(renderVideo)}
           </div>
         </div>
       ))}
@@ -71,23 +96,7 @@ const Videos: React.FC = () => {
             Other Topics
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {ungroupedVideos.map(video => (
-              <div key={video.id} className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-video">
-                  <iframe 
-                    src={`https://www.youtube.com/embed/${video.youtubeId}`}
-                    title={video.title}
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <div className="p-4">
-                  <h4 className="font-semibold text-gray-800">{video.title}</h4>
-                </div>
-              </div>
-            ))}
+            {ungroupedVideos.map(renderVideo)}
           </div>
         </div>
       )}

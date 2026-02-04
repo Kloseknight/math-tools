@@ -7,6 +7,7 @@ import About from '@/react-app/pages/About';
 import PrivacyPolicy from '@/react-app/pages/PrivacyPolicy';
 import Videos from '@/react-app/pages/Videos';
 import Layout from '@/react-app/components/layout/Layout';
+import ScrollToTopButton from '@/react-app/components/ScrollToTopButton';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
+          <ScrollToTopButton />
         </Layout>
       </Router>
     </AuthProvider>

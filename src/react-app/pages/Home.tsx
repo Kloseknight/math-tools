@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { formulaCategories } from '@/react-app/data/formulas';
 import FormulaSelector from '@/react-app/components/FormulaSelector';
@@ -10,6 +10,7 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedFormula, setSelectedFormula] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
+  const calculatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -24,6 +25,9 @@ export default function HomePage() {
 
     if (formulaId) {
       setSelectedFormula(formulaId);
+      setTimeout(() => {
+        calculatorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     } else {
         setSelectedFormula('');
     }
@@ -97,7 +101,7 @@ export default function HomePage() {
       </div>
 
       {currentFormula && (
-          <div className="border-t border-gray-100">
+          <div ref={calculatorRef} className="border-t border-gray-100">
               <FormulaCalculator
                   formula={currentFormula}
                   onCalculate={handleCalculation}
