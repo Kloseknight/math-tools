@@ -46,7 +46,9 @@ export const videoCategories: VideoCategory[] = [
   {
     id: 'relations-functions-and-graphs',
     name: 'Relations, Functions and Graphs',
-    subTopics: []
+    subTopics: [
+      { name: 'Functions', keywords: ['function'] },
+    ]
   },
   {
     id: 'geometry-and-trigonometry',
@@ -54,11 +56,14 @@ export const videoCategories: VideoCategory[] = [
     subTopics: [
         { name: 'Trigonometry', keywords: ['trigonometry', 'sine', 'cosine', 'tan'] },
         { name: 'Pythagoras Theorem', keywords: ['pythagoras'] },
+        { name: 'Translations', keywords: ['translation'] },
     ]
   },
   {
     id: 'vectors-and-matrices',
     name: 'Vectors and Matrices',
-    subTopics: []
+    subTopics: [
+      { name: 'Vectors', keywords: ['vector'] },
+    ]
   }
 ];
