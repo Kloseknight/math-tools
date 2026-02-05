@@ -223,4 +223,28 @@ export const videos: Video[] = [
     youtubeId: 'W2uKy78imsg',
     category: 'Algebra',
   },
+  {
+    id: 'vid38',
+    title: 'Vectors - Exam Type Example 1',
+    youtubeId: 'pDENVIzK6dM',
+    category: 'Vectors and Matrices',
+  },
+  {
+    id: 'vid39',
+    title: 'Functions - Exam Type Example 1',
+    youtubeId: '0KJKLuChDjY',
+    category: 'Relations, Functions and Graphs',
+  },
+  {
+    id: 'vid40',
+    title: 'Translations - Live Tutorial',
+    youtubeId: 'FvY1FZrVCkE',
+    category: 'Geometry and Trigonometry',
+  },
+  {
+    id: 'vid41',
+    title: 'Trigonometric Ratios - Live Tutorial',
+    youtubeId: 'NsaTlQJ4cwM',
+    category: 'Geometry and Trigonometry',
+  },
 ];

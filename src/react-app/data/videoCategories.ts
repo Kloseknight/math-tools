@@ -11,16 +11,16 @@ export const videoCategories: VideoCategory[] = [
         { name: 'Ratio and Proportion', keywords: ['ratio', 'proportion'] },
     ]
   },
-  {
-    id: 'consumer-arithmetic',
-    name: 'Consumer Arithmetic',
-    subTopics: []
-  },
-  {
-    id: 'sets',
-    name: 'Sets',
-    subTopics: []
-  },
+  // {
+  //   id: 'consumer-arithmetic',
+  //   name: 'Consumer Arithmetic',
+  //   subTopics: []
+  // },
+  // {
+  //   id: 'sets',
+  //   name: 'Sets',
+  //   subTopics: []
+  // },
   {
     id: 'measurements',
     name: 'Measurements',
