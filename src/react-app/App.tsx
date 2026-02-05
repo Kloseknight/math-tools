@@ -8,6 +8,7 @@ import PrivacyPolicy from '@/react-app/pages/PrivacyPolicy';
 import Videos from '@/react-app/pages/Videos';
 import Layout from '@/react-app/components/layout/Layout';
 import ScrollToTopButton from '@/react-app/components/ScrollToTopButton';
+import FeedbackPage from '@/react-app/pages/FeedbackPage';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/videos" element={<Navigate to="/videos/number-theory-and-computation" replace />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/feedback" element={<FeedbackPage />} />
           </Routes>
           <ScrollToTopButton />
         </Layout>
