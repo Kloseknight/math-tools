@@ -31,7 +31,17 @@ export const videoCategories: VideoCategory[] = [
   {
     id: 'algebra',
     name: 'Algebra',
-    subTopics: []
+    subTopics: [
+        { name: 'Substitution', keywords: ['substitution'] },
+        { name: 'Subject of Formula', keywords: ['subject of formula'] },
+        { name: 'Simplifying Expressions', keywords: ['simplifying expressions'] },
+        { name: 'Indices', keywords: ['indices'] },
+        { name: 'Variations', keywords: ['variations'] },
+        { name: 'Factorization', keywords: ['factorization'] },
+        { name: 'Simple Equations', keywords: ['simple equations'] },
+        { name: 'Simultaneous Equations', keywords: ['simultaneous equations'] },
+        { name: 'Quadratic Equation', keywords: ['quadratic equation'] },
+    ]
   },
   {
     id: 'relations-functions-and-graphs',
