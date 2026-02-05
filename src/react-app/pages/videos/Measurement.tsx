@@ -3,7 +3,7 @@ import { videos } from '../../data/videos';
 import { Video } from '../../data/types';
 
 const Measurement: React.FC = () => {
-  const measurementVideos: Video[] = videos.filter(video => video.category === 'Measurement';
+  const measurementVideos: Video[] = videos.filter(video => video.category === 'Measurement');
 
   return (
     <div className="p-4">

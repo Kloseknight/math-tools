@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '@/react-app/hooks/useAuth';
 import HomePage from '@/react-app/pages/Home';
 import DictionaryPage from '@/react-app/pages/Dictionary';

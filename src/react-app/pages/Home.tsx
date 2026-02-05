@@ -85,12 +85,10 @@ export default function HomePage() {
                 selectedCategory={selectedCategory}
                 selectedFormula={selectedFormula}
                 onCategoryChange={(catId) => {
-                  setSelectedCategory(catId);
-                  const category = formulaCategories.find(c => c.id === catId);
-                  if (category && category.formulas.length > 0) {
-                    navigate(`/?category=${catId}&formula=${category.formulas[0].id}`);
-                  } else {
+                  if (catId) {
                     navigate(`/?category=${catId}`);
+                  } else {
+                    navigate(`/`);
                   }
                 }}
                 onFormulaChange={(formulaId) => {

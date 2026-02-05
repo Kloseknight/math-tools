@@ -19,7 +19,6 @@ export default function FormulaSelector({
 
   const handleCategoryChange = (categoryId: string) => {
     onCategoryChange(categoryId);
-    onFormulaChange('');
   };
 
   return (
