@@ -16,9 +16,9 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Deploy to Firebase
-        run: |
-          npm install -g firebase-tools
-          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CSEC_MATHS_CALCULATOR }}" > /tmp/google-credentials.json
-          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-credentials.json
-          firebase deploy --only hosting --project csec-maths-calculator --non-interactive
+      - name: Deploy to Firebase Hosting
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
