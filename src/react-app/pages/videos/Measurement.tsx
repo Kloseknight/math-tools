@@ -1,9 +1,9 @@
 import React from 'react';
-import { videos } from '../../data/videos';
-import { Video } from '../../data/types';
+import { videos } from '@/data/videos';
+import { Video } from '@/data/types';
 
 const Measurement: React.FC = () => {
-  const measurementVideos: Video[] = videos.filter(video => video.category === 'Measurement');
+  const measurementVideos: Video[] = videos.filter((video: Video) => video.category === 'Measurement');
 
   return (
     <div className="p-4">
@@ -12,7 +12,7 @@ const Measurement: React.FC = () => {
       <div className="mb-8">
         <h2 className="text-xl font-semibold border-b-2 border-gray-300 mb-4">Measurement</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {measurementVideos.map(video => (
+          {measurementVideos.map((video: Video) => (
             <div key={video.id} className="border rounded-lg p-4 shadow-lg">
               <h3 className="font-bold mb-2">{video.title}</h3>
               <div className="aspect-w-16 aspect-h-9">

@@ -1,9 +1,9 @@
 import React from 'react';
-import { videos } from '../../data/videos';
-import { Video } from '../../data/types';
+import { videos } from '@/data/videos';
+import { Video } from '@/data/types';
 
 const VectorsAndMatrices: React.FC = () => {
-  const vectorsAndMatricesVideos: Video[] = videos.filter(video => video.category === 'Vectors and Matrices');
+  const vectorsAndMatricesVideos: Video[] = videos.filter((video: Video) => video.category === 'Vectors and Matrices');
 
   return (
     <div className="p-4">
@@ -12,7 +12,7 @@ const VectorsAndMatrices: React.FC = () => {
       <div className="mb-8">
         <h2 className="text-xl font-semibold border-b-2 border-gray-300 mb-4">Vectors and Matrices</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {vectorsAndMatricesVideos.map(video => (
+          {vectorsAndMatricesVideos.map((video: Video) => (
             <div key={video.id} className="border rounded-lg p-4 shadow-lg">
               <h3 className="font-bold mb-2">{video.title}</h3>
               <div className="aspect-w-16 aspect-h-9">

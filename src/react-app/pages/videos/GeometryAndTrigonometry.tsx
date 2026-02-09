@@ -1,13 +1,13 @@
 import React from 'react';
-import { videos } from '../../data/videos';
-import { Video } from '../../data/types';
+import { videos } from '@/data/videos';
+import { Video } from '@/data/types';
 
 const GeometryAndTrigonometry: React.FC = () => {
-  const geometryAndTrigonometryVideos: Video[] = videos.filter(video => video.category === 'Geometry and Trigonometry');
+  const geometryAndTrigonometryVideos: Video[] = videos.filter((video: Video) => video.category === 'Geometry and Trigonometry');
 
   const subCategories: { [key: string]: Video[] } = {
-    'Trigonometry': geometryAndTrigonometryVideos.filter(video => video.title.toLowerCase().includes('trigonometry')),
-    'Pythagoras Theorem': geometryAndTrigonometryVideos.filter(video => video.title.toLowerCase().includes('pythagoras')),
+    'Trigonometry': geometryAndTrigonometryVideos.filter((video: Video) => video.title.toLowerCase().includes('trigonometry')),
+    'Pythagoras Theorem': geometryAndTrigonometryVideos.filter((video: Video) => video.title.toLowerCase().includes('pythagoras')),
   };
 
   return (
@@ -22,7 +22,7 @@ const GeometryAndTrigonometry: React.FC = () => {
             <div key={subCategory} className="mb-8">
               <h3 className="text-lg font-semibold text-gray-800 mb-3">{subCategory}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {subCategoryVideos.map(video => (
+                {subCategoryVideos.map((video: Video) => (
                   <div key={video.id} className="border rounded-lg p-4 shadow-lg">
                     <h3 className="font-bold mb-2">{video.title}</h3>
                     <div className="aspect-w-16 aspect-h-9">

@@ -374,6 +374,7 @@ const trigonometryFormulas: Formula[] = [
     id: 'pythagoras',
     name: 'Pythagorean theorem',
     equation: 'a² = b² + c²',
+    diagram: '/diagrams/pythagorean_theorem.png',
     variables: [
       { symbol: 'a', name: 'Length of hypotenuse', unitType: 'length' },
       { symbol: 'b', name: 'Length of opposite side', unitType: 'length' },

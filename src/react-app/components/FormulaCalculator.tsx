@@ -185,6 +185,11 @@ export default function FormulaCalculator({ formula, onCalculate }: FormulaCalcu
       <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-4 border border-red-100">
         <p className="text-sm font-medium text-gray-600 mb-1">Formula</p>
         <p className="text-xl font-semibold text-gray-900 font-mono">{formula.equation}</p>
+        {formula.diagram && (
+          <div className="mt-4">
+            <img src={formula.diagram} alt={`${formula.name} diagram`} className="mx-auto" />
+          </div>
+        )}
       </div>
 
       {!isQuadratic && (
