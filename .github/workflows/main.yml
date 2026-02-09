@@ -16,12 +16,7 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: List files after build
-        run: ls -R
       - name: Deploy to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CSEC_MATHS_CALCULATOR }}'
-          channelId: live
-          projectId: csec-maths-calculator
+        run: |
+          npm install -g firebase-tools
+          firebase deploy --only hosting --project csec-maths-calculator --token "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CSEC_MATHS_CALCULATOR }}" --non-interactive
