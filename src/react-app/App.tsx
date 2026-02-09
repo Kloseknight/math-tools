@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from '@/react-app/hooks/useAuth';
 import HomePage from '@/react-app/pages/Home';
 import DictionaryPage from '@/react-app/pages/Dictionary';
@@ -10,11 +11,23 @@ import VideosHome from '@/react-app/pages/VideosHome'; // Import the new compone
 import Layout from '@/react-app/components/layout/Layout';
 import ScrollToTopButton from '@/react-app/components/ScrollToTopButton';
 import FeedbackPage from '@/react-app/pages/FeedbackPage';
+import ReactGA from 'react-ga4';
+
+function AnalyticsTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: location.pathname + location.search });
+  }, [location]);
+
+  return null;
+}
 
 export default function App() {
   return (
     <AuthProvider>
       <Router>
+        <AnalyticsTracker />
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
