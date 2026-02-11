@@ -8,29 +8,42 @@ const GuidesPage: React.FC = () => {
 
   useEffect(() => {
     if (selectedGuide) {
-      let content = selectedGuide.content;
+      const content = selectedGuide.content;
 
-      // Process block math $$...$$
-      content = content.replace(/\$\$([\s\S]*?)\$\$/g, (match, latex) => {
-        try {
-          return katex.renderToString(latex, { displayMode: true, throwOnError: false });
-        } catch (e) {
-          console.error(e);
-          return match;
+      // A robust regex to split the content by math delimiters, while keeping the delimiters
+      const regex = /(\$\$[\s\S]*?\$\$|\\\([\s\S]*?\\\))/g;
+      const parts = content.split(regex);
+
+      const processedParts = parts.map((part) => {
+        if (part.startsWith('$$') && part.endsWith('$$')) {
+          const latex = part.substring(2, part.length - 2);
+          try {
+            return katex.renderToString(latex, {
+              displayMode: true,
+              throwOnError: false,
+            });
+          } catch (e) {
+            console.error('KaTeX block error:', e);
+            return part; // On error, return the original part
+          }
+        } else if (part.startsWith('\\(') && part.endsWith('\\)')) {
+          const latex = part.substring(2, part.length - 2);
+          try {
+            return katex.renderToString(latex, {
+              displayMode: false,
+              throwOnError: false,
+            });
+          } catch (e) {
+            console.error('KaTeX inline error:', e);
+            return part; // On error, return the original part
+          }
+        } else {
+          // This is a regular text part
+          return part;
         }
       });
 
-      // Process inline math \(...\)
-      content = content.replace(/\\\(([\s\S]*?)\\\)/g, (match, latex) => {
-        try {
-          return katex.renderToString(latex, { displayMode: false, throwOnError: false });
-        } catch (e) {
-          console.error(e);
-          return match;
-        }
-      });
-
-      setProcessedContent(content);
+      setProcessedContent(processedParts.join(''));
     }
   }, [selectedGuide]);
 
