@@ -1,3 +1,10 @@
+export interface Guide {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+}
+
 export interface SubTopic {
   name: string;
   keywords: string[];

@@ -2,6 +2,10 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Formula } from '@/react-app/data/formulas';
 import ParabolaGraph from './ParabolaGraph';
 import { lengthUnits, areaUnits, volumeUnits, conversionFactors } from '@/react-app/data/units';
+import { SignificantFigures } from './calculators/SignificantFigures';
+import { ScientificNotation } from './calculators/ScientificNotation';
+import { DecimalPlaces } from './calculators/DecimalPlaces';
+import { Fractions } from './calculators/Fractions';
 
 interface FormulaCalculatorProps {
   formula: Formula;
@@ -15,6 +19,19 @@ export default function FormulaCalculator({ formula, onCalculate }: FormulaCalcu
   const [result, setResult] = useState<any>(null);
   const [resultUnit, setResultUnit] = useState<string>('');
   const [error, setError] = useState<string>('');
+
+  if (formula.id === 'significant-figures') {
+    return <SignificantFigures />;
+  }
+  if (formula.id === 'scientific-notation') {
+    return <ScientificNotation />;
+  }
+  if (formula.id === 'decimal-places') {
+    return <DecimalPlaces />;
+  }
+  if (formula.id === 'fractions') {
+    return <Fractions />;
+  }
 
   const getUnitsForType = (unitType: 'length' | 'area' | 'volume') => {
     switch (unitType) {

@@ -1,3 +1,5 @@
+import { numberTheoryFormulas } from './formulas/number-theory';
+
 export interface Variable {
   symbol: string;
   name: string;
@@ -481,6 +483,11 @@ const trigonometryFormulas: Formula[] = [
 ];
 
 export const formulaCategories: FormulaCategory[] = [
+  {
+    id: 'number-theory',
+    name: 'Number Theory and Computation',
+    formulas: numberTheoryFormulas
+  },
   {
     id: 'measurement',
     name: 'Measurement',
