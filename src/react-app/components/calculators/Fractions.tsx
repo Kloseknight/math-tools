@@ -38,8 +38,6 @@ export const Fractions: React.FC = () => {
   const handleFractionChange = (index: number, field: keyof FractionState, value: string) => {
     const newFractions = [...fractions];
     const fractionToUpdate = { ...newFractions[index] };
-    // This type assertion fixes the TS error by telling TypeScript
-    // we are aware of the specific types required for the 'type' field.
     (fractionToUpdate as any)[field] = value;
     newFractions[index] = fractionToUpdate;
     setFractions(newFractions);
@@ -75,11 +73,11 @@ export const Fractions: React.FC = () => {
           throw new Error(`Denominator cannot be zero in fraction ${i + 1}.`);
         }
 
-        let fraction = new Fraction(String(num), String(den));
+        let fraction = new Fraction(num, den);
         if (f.type === 'mixed') {
             const sign = whole < 0n ? -1 : 1;
             const absWhole = whole < 0n ? -whole : whole;
-            fraction = fraction.add(String(absWhole)).mul(sign);
+            fraction = fraction.add(absWhole).mul(sign);
         }
         return fraction;
       });
@@ -101,7 +99,7 @@ export const Fractions: React.FC = () => {
                 calculatedResult = calculatedResult.mul(nextFraction);
                 break;
             case Operations.DIVIDE:
-                if (nextFraction.n === 0) {
+                if (nextFraction.n === 0n) {
                     throw new Error('Cannot divide by zero.');
                 }
                 calculatedResult = calculatedResult.div(nextFraction);
@@ -120,7 +118,6 @@ export const Fractions: React.FC = () => {
     const d_big = BigInt(res.d);
     const sign = res.s < 0 ? '-' : '';
 
-    // Compare with a BigInt `1n` to fix the comparison error
     if (d_big === 1n) {
         return sign + n_big.toString().replace('-','');
     }
