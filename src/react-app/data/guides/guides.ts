@@ -1,5 +1,6 @@
 import { significantFiguresGuide } from './significant-figures';
 import { scientificNotationGuide } from './scientific-notation';
+import { fractions } from './fractions';
 
 export const guides = [
   {
@@ -9,5 +10,9 @@ export const guides = [
   {
     ...scientificNotationGuide,
     id: 'scientific-notation',
+  },
+  {
+    ...fractions,
+    id: 'fractions',
   },
 ];
