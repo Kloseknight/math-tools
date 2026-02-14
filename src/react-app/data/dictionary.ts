@@ -1,5 +1,26 @@
 export const dictionaryContent = [
   {
+    title: 'Number Theory & Computation',
+    definitions: [
+      {
+        term: 'Significant Figures',
+        definition: 'The digits in a number that are reliable and necessary to indicate the quantity of something. They are used to maintain precision during calculations.'
+      },
+      {
+        term: 'Scientific Notation',
+        definition: 'A way of expressing numbers that are too large or too small to be conveniently written in decimal form. It is written as a number between 1 and 10 multiplied by a power of 10.'
+      },
+      {
+        term: 'Decimal Places',
+        definition: 'The number of digits to the right of the decimal point in a number.'
+      },
+      {
+        term: 'Fractions',
+        definition: 'A numerical quantity that is not a whole number. A fraction is expressed as a numerator (top number) divided by a denominator (bottom number).'
+      },
+    ]
+  },
+  {
     title: 'Geometry & Measurement',
     definitions: [
       {
@@ -52,12 +73,49 @@ export const dictionaryContent = [
       },
       {
         term: 'Circumference',
-        definition: 'The distance around the edge of a circle.'
+        definition: 'The distance around the edge of a a circle.'
       },
       {
         term: 'Perpendicular Height',
         definition: 'The height of a pyramid, cone, or other solid figure measured at right angles to its base.'
       },
+      {
+        term: 'Slant Height',
+        definition: 'The distance from the apex (vertex) of a cone or pyramid to a point on the circumference of its base.'
+      },
+      {
+        term: 'Sector',
+        definition: 'The portion of a circle enclosed by two radii and an arc. Its area is a fraction of the total area of the circle.'
+      },
+      {
+        term: 'Arc Length',
+        definition: 'The distance along the curved line making up an arc. It is a fraction of the circumference of the circle.'
+      },
+      {
+        term: "Heron\'s Formula",
+        definition: "A formula to calculate the area of a triangle when the lengths of all three sides are known. It is given by A = √[s(s-a)(s-b)(s-c)], where s is the semi-perimeter of the triangle."
+      }
+    ]
+  },
+  {
+    title: 'Algebra',
+    definitions: [
+      {
+        term: 'Quadratic Equation',
+        definition: 'An equation of the second degree, meaning it contains at least one term that is squared. The standard form is ax² + bx + c = 0.'
+      },
+      {
+        term: 'Coefficient',
+        definition: 'A numerical or constant quantity placed before and multiplying the variable in an algebraic expression (e.g., the ‘4‘ in 4x²).'
+      },
+      {
+        term: 'Roots',
+        definition: 'The solutions to an equation. For a quadratic equation, the roots are the values of x that satisfy the equation.'
+      },
+      {
+        term: 'Discriminant',
+        definition: 'The part of the quadratic formula underneath the square root symbol: b²-4ac. It is used to determine the number and type of roots of a quadratic equation.'
+      }
     ]
   },
   {
