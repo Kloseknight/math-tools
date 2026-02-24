@@ -1,5 +1,5 @@
-name: Build and Deploy
-on:
+name: Build and Deploy to Firebase Hosting
+'on':
   push:
     branches:
       - main
@@ -7,20 +7,15 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Install dependencies
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
         run: npm install
       - name: Build
         run: npm run build
-        env:
-          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
-      - name: Deploy to Firebase Hosting
-        uses: w9jds/firebase-action@master
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          repoToken: '''${{ secrets.GITHUB_TOKEN }}'''
+          firebaseServiceAccount: '''${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY_CSEC_MATHS_CALCULATOR }}'''
+          channelId: live
+          projectId: csec-maths-calculator
