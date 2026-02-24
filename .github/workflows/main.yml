@@ -15,7 +15,7 @@ jobs:
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '''${{ secrets.GITHUB_TOKEN }}'''
-          firebaseServiceAccount: '''${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY_CSEC_MATHS_CALCULATOR }}'''
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY_CSEC_MATHS_CALCULATOR }}'
           channelId: live
           projectId: csec-maths-calculator
