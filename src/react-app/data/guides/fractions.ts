@@ -2,13 +2,13 @@ import { Guide } from '@/react-app/data/types';
 
 export const fractions: Guide = {
   id: 'fractions',
-  title: 'Fractions Guide',
+  title: 'Fractions',
   description: 'A complete breakdown of everything you need to know about fractions — definitions, rules, examples, and step-by-step methods.',
   content: `
     <div class="space-y-6 text-gray-700">
 
       <div class="p-6 bg-blue-50 rounded-xl border border-blue-200">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">1. What Is a Fraction?</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">What Is a Fraction?</h2>
         <p class="text-lg">A fraction represents a part of a whole. It is written as:</p>
         <div class="text-center text-2xl font-sans my-4">
           <span class="relative inline-block">
@@ -25,7 +25,7 @@ export const fractions: Guide = {
       </div>
 
       <div class="p-6 bg-green-50 rounded-xl border border-green-200">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">2. Types of Fractions</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Types of Fractions</h2>
         <p class="text-lg">Fractions are classified based on the sizes of the numerator and denominator:</p>
         <ul class="list-disc list-inside space-y-2 text-lg mt-2">
           <li><strong>Proper Fractions:</strong> numerator &lt; denominator (e.g., <code class="font-mono bg-gray-200 px-2 rounded"><sup>3</sup>&frasl;<sub>7</sub></code>)</li>
@@ -44,13 +44,13 @@ export const fractions: Guide = {
       </div>
 
       <div class="space-y-4">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">3. Equivalent & Simplifying Fractions</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Equivalent & Simplifying Fractions</h2>
         <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm"><strong>Equivalent fractions</strong> look different but represent the same value. To find them, multiply or divide both the numerator and the denominator by the same number.<br>Example: <code class="font-mono bg-gray-200 px-2 rounded"><sup>1</sup>&frasl;<sub>2</sub></code> → (×2/×2) = <code class="font-mono bg-gray-200 px-2 rounded"><sup>2</sup>&frasl;<sub>4</sub></code> → (×3/×3) = <code class="font-mono bg-gray-200 px-2 rounded"><sup>3</sup>&frasl;<sub>6</sub></code></div>
         <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm"><strong>Simplifying (Reducing) Fractions:</strong> Find the Highest Common Factor (HCF) of the numerator and denominator, then divide both by it.<br>Example: <code class="font-mono bg-gray-200 px-2 rounded"><sup>12</sup>&frasl;<sub>18</sub></code> → HCF is 6 → (12 ÷ 6)/(18 ÷ 6) = <code class="font-mono bg-gray-200 px-2 rounded"><sup>2</sup>&frasl;<sub>3</sub></code></div>
       </div>
 
       <div>
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">4. Operations with Fractions</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Operations with Fractions</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg">
           <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm"><strong>Adding:</strong> Find the Lowest Common Denominator (LCD), convert fractions, then add numerators.<br>Ex: <code class="font-mono bg-gray-200 px-2 rounded"><sup>1</sup>&frasl;<sub>4</sub> + <sup>1</sup>&frasl;<sub>6</sub></code> → <code class="font-mono bg-gray-200 px-2 rounded"><sup>3</sup>&frasl;<sub>12</sub> + <sup>2</sup>&frasl;<sub>12</sub></code> = <code class="font-mono bg-gray-200 px-2 rounded"><sup>5</sup>&frasl;<sub>12</sub></code></div>
           <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm"><strong>Subtracting:</strong> Same as addition, but subtract numerators.<br>Ex: <code class="font-mono bg-gray-200 px-2 rounded"><sup>5</sup>&frasl;<sub>6</sub> - <sup>1</sup>&frasl;<sub>4</sub></code> → <code class="font-mono bg-gray-200 px-2 rounded"><sup>10</sup>&frasl;<sub>12</sub> - <sup>3</sup>&frasl;<sub>12</sub></code> = <code class="font-mono bg-gray-200 px-2 rounded"><sup>7</sup>&frasl;<sub>12</sub></code></div>

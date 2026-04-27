@@ -2,6 +2,7 @@ import { significantFiguresGuide } from './significant-figures';
 import { scientificNotationGuide } from './scientific-notation';
 import { fractions } from './fractions';
 import { ratioProportionRates } from './ratio-proportion-rates';
+import { consumerArithmeticGuide } from './consumer-arithmetic';
 
 export const guides = [
   {
@@ -19,5 +20,9 @@ export const guides = [
   {
     ...ratioProportionRates,
     id: 'ratio-proportion-rates',
+  },
+  {
+    ...consumerArithmeticGuide,
+    id: 'consumer-arithmetic',
   },
 ];

@@ -8,7 +8,7 @@ export const ratioProportionRates: Guide = {
     <div class="space-y-6 text-gray-700">
 
       <div class="p-6 bg-blue-50 rounded-xl border border-blue-200">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">1. Comparing Quantities Using Ratios</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Comparing Quantities Using Ratios</h2>
         <p class="text-lg">A ratio compares two quantities of the same kind using division.</p>
         <div class="text-center text-2xl font-sans my-4">
           <span class="relative inline-block">
@@ -39,7 +39,7 @@ export const ratioProportionRates: Guide = {
       </div>
 
       <div class="p-6 bg-green-50 rounded-xl border border-green-200">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">2. Dividing in a Given Ratio</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Dividing in a Given Ratio</h2>
         <p class="text-lg">If $600 is shared in the ratio 2 : 3, find each share.</p>
         <ol class="list-decimal list-inside space-y-2 text-lg mt-2">
             <li><strong>Add parts:</strong> 2 + 3 = 5</li>
@@ -50,7 +50,7 @@ export const ratioProportionRates: Guide = {
       </div>
 
       <div class="p-6 bg-blue-50 rounded-xl border border-blue-200">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">3. Proportion</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Proportion</h2>
         <p class="text-lg">Two ratios are equal. We solve using cross multiplication.</p>
         <div class="text-center text-2xl font-sans my-4">
             <code class="font-mono bg-gray-200 px-2 rounded"><sup>a</sup>&frasl;<sub>b</sub> = <sup>c</sup>&frasl;<sub>d</sub></code>
@@ -74,24 +74,24 @@ export const ratioProportionRates: Guide = {
       </div>
 
       <div class="space-y-4">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">4. Rates</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Rates</h2>
         <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">A rate is a ratio comparing quantities with different units.<br>Examples: km per hour, dollars per kilogram, litres per minute.</div>
         <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm"><strong>Speed Formula:</strong> <code class="font-mono bg-gray-200 px-2 rounded">Speed = Distance / Time</code><br>Example: A car travels 180 km in 3 hours. Speed = 180/3 = 60 km/h</div>
       </div>
       
       <div class="space-y-4">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">5. Unit Rate</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Unit Rate</h2>
         <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">A unit rate compares a quantity to 1 unit.<br>Example: If 5 kg of rice costs $40, the unit rate is $40/5 = $8 per kg.</div>
       </div>
 
       <div class="p-6 bg-green-50 rounded-xl border border-green-200">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">6. Direct Proportion</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Direct Proportion</h2>
         <p class="text-lg">As one quantity increases, the other increases. <code class="font-mono bg-gray-200 px-2 rounded">y = kx</code></p>
         <p class="text-lg mt-3"><strong>Example:</strong> If 3 mangoes cost $6, how much do 9 mangoes cost? Since 9 is 3 times 3, the cost is 6 × 3 = $18.</p>
       </div>
       
       <div class="p-6 bg-yellow-50 rounded-xl border border-yellow-200">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">7. Inverse Proportion</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Inverse Proportion</h2>
         <p class="text-lg">As one quantity increases, the other decreases. <code class="font-mono bg-gray-200 px-2 rounded">xy = k</code></p>
         <p class="text-lg mt-3"><strong>Example:</strong> If 4 workers complete a job in 6 days, how long will 8 workers take? 4 × 6 = 24, so 8 × x = 24, which means x = 3 days.</p>
       </div>
