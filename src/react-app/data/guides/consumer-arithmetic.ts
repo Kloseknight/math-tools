@@ -94,7 +94,7 @@ export const consumerArithmeticGuide = {
       <!-- Common Mistakes & Exam Tips -->
       <div class="grid md:grid-cols-2 gap-6">
           <div class="p-6 bg-red-100 rounded-xl border border-red-300">
-              <h2 class="text-2xl font-bold text-red-800 mb-3">⚠️ Common CSEC Mistakes</h2>
+              <h2 class="text-2xl font-bold text-red-800 mb-3">Common CSEC Mistakes</h2>
               <ul class="list-disc list-inside space-y-2 text-lg">
                   <li>Using SP instead of CP for percentage calculations.</li>
                   <li>Not converting percentages to decimals correctly.</li>
@@ -103,7 +103,7 @@ export const consumerArithmeticGuide = {
               </ul>
           </div>
           <div class="p-6 bg-green-100 rounded-xl border border-green-300">
-              <h2 class="text-2xl font-bold text-green-800 mb-3">🎯 Exam Tips</h2>
+              <h2 class="text-2xl font-bold text-green-800 mb-3">Exam Tips</h2>
               <ul class="list-disc list-inside space-y-2 text-lg">
                   <li>Always define the variables you are using.</li>
                   <li>Write down the formula before substituting values.</li>
@@ -115,7 +115,7 @@ export const consumerArithmeticGuide = {
 
       <!-- Quick Summary Table -->
       <div>
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">🧠 Quick Summary Table</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Quick Summary Table</h2>
         <div class="overflow-x-auto">
           <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
             <thead class="bg-gray-100">
@@ -138,7 +138,7 @@ export const consumerArithmeticGuide = {
 
       <!-- Practice Questions -->
       <div class="p-6 bg-yellow-50 rounded-xl border border-yellow-200">
-        <h2 class="text-2xl font-bold text-gray-800 mb-3">✏️ Practice Questions</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Practice Questions</h2>
         <ul class="list-decimal list-inside space-y-2 text-lg">
           <li>Find the profit and % profit if CP = $90 and SP = $120.</li>
           <li>A $200 item has a 15% tax. Find the total cost.</li>
